@@ -26,3 +26,8 @@ variable "create_instance" {
   description = "Create instance or not"
   default = true
 }
+
+variable "vpc_id" {
+  type = string
+  description = "VPC Id"
+}

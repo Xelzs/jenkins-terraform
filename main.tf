@@ -27,6 +27,7 @@ resource "aws_instance" "instance_terraform_simonet" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   key_name = "tp_dev_ynov"
+  security_groups = [ var.vpc_id ]
 
   tags = {
     Name = var.instance_name
