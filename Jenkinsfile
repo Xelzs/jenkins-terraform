@@ -3,7 +3,7 @@ properties([pipelineTriggers([githubPush()])])
 pipeline {
     agent { 
       docker {
-        image 'hashicorp/terraform'
+        image 'hashicorp/terraform:light'
         args  '--entrypoint='
       }
     }
@@ -19,7 +19,7 @@ pipeline {
     stages {
       stage('init') {
         steps {
-          sh 'terraform init'
+          sh 'terraform init -backend-config=backend.tfvars'
         }
       }
       stage('plan') {
@@ -30,6 +30,11 @@ pipeline {
       stage('apply') {
         steps {
           sh 'terraform apply -auto-approve'
+        }
+      }
+      stage('output') {
+        steps {
+          sh 'terraform output'
         }
       }
     }
